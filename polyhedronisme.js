@@ -7521,24 +7521,25 @@ const opmap = {
   "C": canonicalize,
   "A": adjustXYZ,
 };
-//unclaimed: yihfzv
+//unclaimed: yhfzvBGYS
 
 // list of basic equivalences, easier to replace before parsing
 const specreplacements = [
   [/e/g, "aa"],   // e --> aa   (abbr. for explode)
+  [/i/g, "aaa"],  // i --> aaa  (abbr. for ambo explode)
   [/b/g, "ta"],   // b --> ta   (abbr. for bevel)
   [/o/g, "jj"],   // o --> jj   (abbr. for ortho)
   [/m/g, "kj"],   // m --> kj   (abbr. for meta)
   [/t(\d*)/g, "dk$1d"],  // t(n) --> dk(n)d  (dual operations)
   [/j/g, "dad"],  // j --> dad  (dual operations) # Why not j --> da ?
   [/s/g, "dgd"],  // s --> dgd  (dual operations) # Why not s --> dg ?
-  [/dd/g, ""],    // dd --> null  (order 2)
-  [/ad/g, "a"],   // ad --> a   (a_ = ad_)
-  [/gd/g, "g"],   // gd --> g   (g_ = gd_)
-  [/aO/g, "aC"],  // aO --> aC  (for uniqueness)
-  [/aI/g, "aD"],  // aI --> aD  (for uniqueness)
-  [/gO/g, "gC"],  // gO --> gC  (for uniqueness)
-  [/gI/g, "gD"]];  // gI --> gD  (for uniqueness)
+  [/dd/g, "dd"],    // dd --> A1  (order 2)
+  [/ad/g, "ad"],   // ad --> a   (a_ = ad_)
+  [/gd/g, "gd"],   // gd --> g   (g_ = gd_)
+  [/aO/g, "aO"],  // aO --> aC  (for uniqueness)
+  [/aI/g, "aO"],  // aI --> aD  (for uniqueness)
+  [/gO/g, "gO"],  // gO --> gC  (for uniqueness)
+  [/gI/g, "gI"]];  // gI --> gD  (for uniqueness)
 
 const getOps = function(notation) {
   let expanded = notation;
