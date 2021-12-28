@@ -6240,7 +6240,7 @@ class polyflag {
 
 
 //===================================================================================================
-// Polyhedron Operators
+// Polyhedron Operators - in 2nd anniversary
 //===================================================================================================
 // for each vertex of new polyhedron:
 //     call newV(Vname, xyz) with a symbolic name and coordinates
