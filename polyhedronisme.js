@@ -1,14 +1,11 @@
-// Polyhédronisme
+// Two Years Of Polyhédronisme
 //===================================================================================================
 //
-// A toy for constructing and manipulating polyhedra and other meshes
+// Since it's the 2 year anniversary we added new seed polyhedra and operators
 //
 // Includes implementation of the conway polyhedral operators derived
 // from code by mathematician and mathematical sculptor
 // George W. Hart http://www.georgehart.com/
-//
-// Copyright 2019, Anselm Levskaya
-// Released under the MIT License
 
 
 // Math / Vector / Matrix Functions
@@ -832,6 +829,14 @@ const cube = function() {
   return poly;
 };
 
+const square = function() {
+  const poly = new polyhedron();
+  poly.name = "Z4";
+  poly.faces = [ [0,1,2,3] ];
+  poly.vertices  = [ [1,1,0],[1,-1,0],[-1,-1,0],[-1,1,0] ];
+  return poly;
+};
+
 const icosahedron = function() {
   const poly = new polyhedron();
   poly.name = "I";
@@ -1002,7 +1007,7 @@ const anticupola = function(n, alpha, height) {
   if (alpha===undefined) { alpha = 0.0; }
 
   let poly = new polyhedron();
-  poly.name = `U${n}`;
+  poly.name = `V${n}`;
 
   if (n < 3) {
     return poly;
@@ -7492,6 +7497,7 @@ const basemap = {
   "C": cube,
   "I": icosahedron,
   "D": dodecahedron,
+  "Z": square,
   "P": prism,     //takes integer arg
   "A": antiprism, //takes integer arg
   "Y": pyramid,   //takes integer arg
@@ -7509,7 +7515,6 @@ const opmap = {
   "r": reflect,
   "c": chamfer,
   "w": whirl,
-  "n": insetN, //-->needle
   "x": extrudeN,
   "l": loft,
   "P": perspectiva1,
@@ -7526,7 +7531,7 @@ const opmap = {
 // list of basic equivalences, easier to replace before parsing
 const specreplacements = [
   [/e/g, "aa"],   // e --> aa   (abbr. for explode)
-  [/i/g, "aaa"],  // i --> aaa  (abbr. for ambo explode)
+  [/i/g, "aaa"],[/z/g, "dk"],[/n/g, "kd"],  // i --> aaa  (abbr. for ambo explode)
   [/b/g, "ta"],   // b --> ta   (abbr. for bevel)
   [/o/g, "jj"],   // o --> jj   (abbr. for ortho)
   [/m/g, "kj"],   // m --> kj   (abbr. for meta)
@@ -7539,14 +7544,15 @@ const specreplacements = [
   [/aO/g, "aO"],  // aO --> aC  (for uniqueness)
   [/aI/g, "aO"],  // aI --> aD  (for uniqueness)
   [/gO/g, "gO"],  // gO --> gC  (for uniqueness)
-  [/gI/g, "gI"],[/X/g, "dzdI"]];  // gI --> gD  (for uniqueness)
+  [/gI/g, "gI"],[/X/g, "dzdI"]
+  ,[/W(\d*)/g, "dzdP$1"]];  // gI$144 --> gD$144  (for uniqueness)
 
 const getOps = function(notation) {
   let expanded = notation;
   for (let [orig,equiv] of specreplacements) {
     expanded = expanded.replace(orig,equiv);
   }
-  console.log(`${notation} executed as ${expanded}`);
+  console.log(`${notation} ===> ${expanded}`);
   return expanded;
 };
 
