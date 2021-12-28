@@ -7539,7 +7539,7 @@ const specreplacements = [
   [/aO/g, "aO"],  // aO --> aC  (for uniqueness)
   [/aI/g, "aO"],  // aI --> aD  (for uniqueness)
   [/gO/g, "gO"],  // gO --> gC  (for uniqueness)
-  [/gI/g, "gI"]];  // gI --> gD  (for uniqueness)
+  [/gI/g, "gI"],[/X/g, "dzdI"]];  // gI --> gD  (for uniqueness)
 
 const getOps = function(notation) {
   let expanded = notation;
